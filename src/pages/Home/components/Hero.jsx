@@ -50,9 +50,6 @@ const Hero = () => {
           </span>
         </h1>
 
-        {/* Accent Line */}
-        <div className="my-6 h-[2px] w-12 bg-accent" />
-
         {/* Description */}
         <p className="text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
           Mobile &amp; desktop apps. Scalable backends &amp; databases.
