@@ -60,15 +60,15 @@ const Hero = () => {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
           <button
             onClick={() => ScrollSmoother.get()?.scrollTo('#projects')}
-            className="flex items-center gap-2 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white cursor-pointer"
+            className="flex w-44 items-center justify-center gap-2 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white cursor-pointer"
           >
-            Explore Projects
+            Projects
             <ArrowRight size={16} />
           </button>
 
           <button
             onClick={() => ScrollSmoother.get()?.scrollTo('#contact')}
-            className="border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white cursor-pointer"
+            className="flex w-44 items-center justify-center border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white cursor-pointer"
           >
             Get in Touch
           </button>
