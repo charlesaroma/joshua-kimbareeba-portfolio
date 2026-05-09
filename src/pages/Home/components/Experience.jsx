@@ -35,9 +35,11 @@ const experiences = [
 
 const techStack = [
   { name: "Node.js", icon: Server, level: "Expert" },
-  { name: "REST API", icon: Database, level: "Advanced" },
-  { name: "React", icon: Globe, level: "Advanced" },
-  { name: "Frontend", icon: Layout, level: "Advanced" },
+  { name: "React Native", icon: Smartphone, level: "Advanced" },
+  { name: "Flutter", icon: Smartphone, level: "Advanced" },
+  { name: "Electron", icon: Monitor, level: "Advanced" },
+  { name: "MongoDB", icon: Database, level: "Advanced" },
+  { name: "Prisma", icon: Database, level: "Advanced" },
   { name: "TypeScript", icon: Zap, level: "Expert" },
   { name: "Architecture", icon: Cpu, level: "Advanced" },
 ];

@@ -13,32 +13,29 @@ const Projects = () => {
   const projects = [
     {
       title: "Alero REST API Suite",
-      category: "Backend Architecture",
       description:
-        "Engineered a suite of high-performance Node.js REST APIs for diverse client requirements, focusing on scalability and speed.",
-      tags: ["Node.js", "Express", "MongoDB", "Redis"],
+        "Engineered a suite of high-performance Node.js REST APIs with MongoDB and Prisma, focusing on scalability and speed.",
+      tags: ["Node.js", "Express", "MongoDB", "Prisma"],
       image:
         "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200",
       link: "#",
       github: "#",
     },
     {
-      title: "Enterprise API Gateway",
-      category: "Backend Infrastructure",
+      title: "Cross-Platform Mobile App",
       description:
-        "Designed and deployed a scalable API gateway handling authentication, rate limiting, and request routing for microservices.",
-      tags: ["Node.js", "Redis", "Docker", "Microservices"],
+        "Built a cross-platform mobile application with Flutter and React Native, featuring real-time sync and offline support.",
+      tags: ["Flutter", "React Native", "Dart", "Firebase"],
       image:
         "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
       link: "#",
       github: "#",
     },
     {
-      title: "Full-Stack Web Platform",
-      category: "Full-Stack Development",
+      title: "Desktop App with Electron",
       description:
-        "Built end-to-end web applications with React frontends and Node.js backends, delivering performant and maintainable solutions.",
-      tags: ["React", "Tailwind", "Framer Motion"],
+        "Developed a cross-platform desktop application using Electron, React, and Prisma for local-first data management.",
+      tags: ["Electron", "React", "Prisma", "SQLite"],
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
       link: "#",
@@ -183,12 +180,7 @@ const Projects = () => {
                 className={`lg:col-span-5 flex flex-col gap-8 ${index % 2 !== 0 ? "lg:order-1" : ""}`}
               >
                 <div>
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="w-8 h-px bg-accent"></span>
-                    <span className="font-heading font-bold text-accent uppercase tracking-[0.3em] text-[10px]">
-                      {project.category}
-                    </span>
-                  </div>
+
                   <h3 className="text-4xl md:text-5xl font-black uppercase text-primary leading-none mb-6 group-hover:text-accent transition-colors">
                     {project.title}
                   </h3>
