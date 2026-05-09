@@ -55,8 +55,8 @@ const Hero = () => {
 
         {/* Description */}
         <p className="text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
-          Scalable backend systems. High-performance frontend experiences.
-          Engineered for the modern web.
+          Mobile &amp; desktop apps. Scalable backends &amp; databases.
+          Engineered for the modern stack.
         </p>
 
         {/* CTA Buttons */}

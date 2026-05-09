@@ -10,6 +10,8 @@ import {
   Zap,
   Cpu,
   Terminal,
+  Smartphone,
+  Monitor,
 } from "lucide-react";
 
 const experiences = [
@@ -18,25 +20,25 @@ const experiences = [
     role: "Senior Developer",
     period: "April 2019 – Present",
     description:
-      "Leading technical initiatives and building high-performance web applications with scalable architecture.",
-    skills: ["Architecture", "Scaling", "Full-Stack"],
+      "Building high-performance web, mobile, and desktop applications with scalable architecture and robust databases.",
+    skills: ["Architecture", "Scaling", "Full-Stack", "Databases"],
   },
   {
-    company: "Alero (Digital Branding & Software Development)",
+    company: "Alero (Software Development)",
     role: "Software Developer",
     period: "Freelance / Contract",
     description:
-      "Building robust REST APIs with Node.js and driving digital branding strategies for diverse clients.",
-    skills: ["REST API", "Node.js", "Branding"],
+      "Building robust REST APIs with Node.js and delivering full-stack solutions for diverse clients.",
+    skills: ["REST API", "Node.js", "Full-Stack"],
   },
 ];
 
 const techStack = [
   { name: "Node.js", icon: Server, level: "Expert" },
   { name: "REST API", icon: Database, level: "Advanced" },
-  { name: "Web Design", icon: Globe, level: "Advanced" },
-  { name: "UI/UX Design", icon: Layout, level: "Advanced" },
-  { name: "Digital Branding", icon: Zap, level: "Expert" },
+  { name: "React", icon: Globe, level: "Advanced" },
+  { name: "Frontend", icon: Layout, level: "Advanced" },
+  { name: "TypeScript", icon: Zap, level: "Expert" },
   { name: "Architecture", icon: Cpu, level: "Advanced" },
 ];
 

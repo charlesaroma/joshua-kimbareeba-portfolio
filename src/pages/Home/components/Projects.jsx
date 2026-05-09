@@ -1,13 +1,10 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import {
   ArrowUpRight,
   Github,
   ExternalLink,
-  Code2,
-  Monitor,
-  Layers,
 } from "lucide-react";
 
 const Projects = () => {
@@ -18,7 +15,7 @@ const Projects = () => {
       title: "Alero REST API Suite",
       category: "Backend Architecture",
       description:
-        "Engineered a suite of high-performance Node.js REST APIs for diverse client branding requirements, focusing on scalability and speed.",
+        "Engineered a suite of high-performance Node.js REST APIs for diverse client requirements, focusing on scalability and speed.",
       tags: ["Node.js", "Express", "MongoDB", "Redis"],
       image:
         "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200",
@@ -26,21 +23,21 @@ const Projects = () => {
       github: "#",
     },
     {
-      title: "USIU-Africa 2020 Yearbook",
-      category: "Editorial & Digital Design",
+      title: "Enterprise API Gateway",
+      category: "Backend Infrastructure",
       description:
-        "Lead editor and instrumental force in the publication of the 2020 USIU-Africa Yearbook, managing content and digital layout.",
-      tags: ["InDesign", "Branding", "Digital Layout"],
+        "Designed and deployed a scalable API gateway handling authentication, rate limiting, and request routing for microservices.",
+      tags: ["Node.js", "Redis", "Docker", "Microservices"],
       image:
         "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
       link: "#",
       github: "#",
     },
     {
-      title: "Corporate Digital Identity",
-      category: "Digital Strategy & UX",
+      title: "Full-Stack Web Platform",
+      category: "Full-Stack Development",
       description:
-        "Helping brands turn ideas into functional websites that drive business growth through strategic UI/UX and brand alignment.",
+        "Built end-to-end web applications with React frontends and Node.js backends, delivering performant and maintainable solutions.",
       tags: ["React", "Tailwind", "Framer Motion"],
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
