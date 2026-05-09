@@ -1,38 +1,51 @@
-import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { ArrowUpRight, Github, ExternalLink, Code2, Monitor, Layers } from 'lucide-react';
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import {
+  ArrowUpRight,
+  Github,
+  ExternalLink,
+  Code2,
+  Monitor,
+  Layers,
+} from "lucide-react";
 
 const Projects = () => {
   const container = useRef();
 
   const projects = [
     {
-      title: 'Alero REST API Suite',
-      category: 'Backend Architecture',
-      description: 'Engineered a suite of high-performance Node.js REST APIs for diverse client branding requirements, focusing on scalability and speed.',
-      tags: ['Node.js', 'Express', 'MongoDB', 'Redis'],
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80&w=1200',
-      link: '#',
-      github: '#'
+      title: "Alero REST API Suite",
+      category: "Backend Architecture",
+      description:
+        "Engineered a suite of high-performance Node.js REST APIs for diverse client branding requirements, focusing on scalability and speed.",
+      tags: ["Node.js", "Express", "MongoDB", "Redis"],
+      image:
+        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200",
+      link: "#",
+      github: "#",
     },
     {
-      title: 'USIU-Africa 2020 Yearbook',
-      category: 'Editorial & Digital Design',
-      description: 'Lead editor and instrumental force in the publication of the 2020 USIU-Africa Yearbook, managing content and digital layout.',
-      tags: ['InDesign', 'Branding', 'Digital Layout'],
-      image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200',
-      link: '#',
-      github: '#'
+      title: "USIU-Africa 2020 Yearbook",
+      category: "Editorial & Digital Design",
+      description:
+        "Lead editor and instrumental force in the publication of the 2020 USIU-Africa Yearbook, managing content and digital layout.",
+      tags: ["InDesign", "Branding", "Digital Layout"],
+      image:
+        "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=1200",
+      link: "#",
+      github: "#",
     },
     {
-      title: 'Corporate Digital Identity',
-      category: 'Digital Strategy & UX',
-      description: 'Helping brands turn ideas into functional websites that drive business growth through strategic UI/UX and brand alignment.',
-      tags: ['React', 'Tailwind', 'Framer Motion'],
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200',
-      link: '#',
-      github: '#'
+      title: "Corporate Digital Identity",
+      category: "Digital Strategy & UX",
+      description:
+        "Helping brands turn ideas into functional websites that drive business growth through strategic UI/UX and brand alignment.",
+      tags: ["React", "Tailwind", "Framer Motion"],
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
+      link: "#",
+      github: "#",
     },
   ];
 
@@ -52,41 +65,44 @@ const Projects = () => {
     gsap.to(overlay, { opacity: 0, duration: 0.4 });
   });
 
-  useGSAP(() => {
-    // Title Animation
-    gsap.from(".projects-title", {
-      scrollTrigger: {
-        trigger: ".projects-title",
-        start: "top 80%",
-      },
-      opacity: 0,
-      y: 50,
-      duration: 1,
-      ease: "power4.out"
-    });
-
-    // Project Cards Reveal
-    const cards = gsap.utils.toArray(".project-card");
-    cards.forEach((card, i) => {
-      gsap.from(card, {
+  useGSAP(
+    () => {
+      // Title Animation
+      gsap.from(".projects-title", {
         scrollTrigger: {
-          trigger: card,
-          start: "top 85%",
+          trigger: ".projects-title",
+          start: "top 80%",
         },
         opacity: 0,
-        y: 60,
-        rotateX: -15,
-        duration: 1.2,
-        ease: "power3.out",
-        delay: i * 0.1
+        y: 50,
+        duration: 1,
+        ease: "power4.out",
       });
-    });
-  }, { scope: container });
+
+      // Project Cards Reveal
+      const cards = gsap.utils.toArray(".project-card");
+      cards.forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+          opacity: 0,
+          y: 60,
+          rotateX: -15,
+          duration: 1.2,
+          ease: "power3.out",
+          delay: i * 0.1,
+        });
+      });
+    },
+    { scope: container },
+  );
 
   return (
-    <section 
-      ref={container} 
-      id="projects" 
+    <section
+      ref={container}
+      id="projects"
       className="py-32 bg-bg relative overflow-hidden"
     >
       {/* Background Decorative Lines */}
@@ -104,51 +120,71 @@ const Projects = () => {
             </span>
             <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] text-primary">
               NOTABLE <br />
-              <span className="text-transparent" style={{ WebkitTextStroke: '1.5px var(--color-primary)' }}>PROJECTS</span>
+              <span
+                className="text-transparent"
+                style={{ WebkitTextStroke: "1.5px var(--color-primary)" }}
+              >
+                PROJECTS
+              </span>
             </h2>
           </div>
-          
+
           <div className="hidden lg:flex items-center gap-4 pb-4">
             <div className="flex -space-x-3">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-bg bg-primary/10 flex items-center justify-center text-[10px] font-black">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="w-10 h-10 rounded-full border-2 border-bg bg-primary/10 flex items-center justify-center text-[10px] font-black"
+                >
                   0{i}
                 </div>
               ))}
             </div>
-            <p className="text-[10px] font-black uppercase tracking-widest text-primary/40">Total Highlights</p>
+            <p className="text-[10px] font-black uppercase tracking-widest text-primary/40">
+              Total Highlights
+            </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 gap-32">
           {projects.map((project, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="project-card group relative grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
               onMouseEnter={onProjectEnter}
               onMouseLeave={onProjectLeave}
             >
               {/* Project Image Side */}
-              <div className={`lg:col-span-7 overflow-hidden rounded-3xl relative aspect-[16/10] bg-primary/5 ${index % 2 !== 0 ? 'lg:order-2' : ''}`}>
-                <img 
-                  src={project.image} 
+              <div
+                className={`lg:col-span-7 overflow-hidden rounded-3xl relative aspect-[16/10] bg-primary/5 ${index % 2 !== 0 ? "lg:order-2" : ""}`}
+              >
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="project-img w-full h-full object-cover transition-all duration-700 grayscale hover:grayscale-0"
                 />
                 <div className="project-overlay absolute inset-0 bg-primary/40 opacity-0 flex items-center justify-center backdrop-blur-[2px] transition-all duration-500">
-                   <div className="flex gap-4">
-                      <a href={project.link} className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-primary hover:bg-accent hover:text-white transition-all transform hover:scale-110">
-                        <ExternalLink size={24} />
-                      </a>
-                      <a href={project.github} className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-primary hover:bg-accent hover:text-white transition-all transform hover:scale-110">
-                        <Github size={24} />
-                      </a>
-                   </div>
+                  <div className="flex gap-4">
+                    <a
+                      href={project.link}
+                      className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-primary hover:bg-accent hover:text-white transition-all transform hover:scale-110"
+                    >
+                      <ExternalLink size={24} />
+                    </a>
+                    <a
+                      href={project.github}
+                      className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-primary hover:bg-accent hover:text-white transition-all transform hover:scale-110"
+                    >
+                      <Github size={24} />
+                    </a>
+                  </div>
                 </div>
               </div>
 
               {/* Project Info Side */}
-              <div className={`lg:col-span-5 flex flex-col gap-8 ${index % 2 !== 0 ? 'lg:order-1' : ''}`}>
+              <div
+                className={`lg:col-span-5 flex flex-col gap-8 ${index % 2 !== 0 ? "lg:order-1" : ""}`}
+              >
                 <div>
                   <div className="flex items-center gap-3 mb-4">
                     <span className="w-8 h-px bg-accent"></span>
@@ -166,18 +202,23 @@ const Projects = () => {
 
                 <div className="flex flex-wrap gap-3">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="px-4 py-1.5 bg-primary/5 border border-primary/5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary/60">
+                    <span
+                      key={i}
+                      className="px-4 py-1.5 bg-primary/5 border border-primary/5 rounded-full text-[10px] font-black uppercase tracking-widest text-primary/60"
+                    >
                       {tag}
                     </span>
                   ))}
                 </div>
 
                 <div className="pt-4">
-                  <a 
-                    href={project.link} 
+                  <a
+                    href={project.link}
                     className="inline-flex items-center gap-4 group/btn"
                   >
-                    <span className="text-sm font-black uppercase tracking-[0.2em] text-primary">View Project</span>
+                    <span className="text-sm font-black uppercase tracking-[0.2em] text-primary">
+                      View Project
+                    </span>
                     <div className="w-12 h-12 rounded-full border border-primary/10 flex items-center justify-center group-hover/btn:bg-primary group-hover/btn:text-white transition-all duration-300">
                       <ArrowUpRight size={20} />
                     </div>
@@ -198,4 +239,3 @@ const Projects = () => {
 };
 
 export default Projects;
-

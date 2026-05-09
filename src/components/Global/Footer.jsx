@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Github, Linkedin, Facebook, Youtube, ArrowUp, Mail, MapPin, Code } from 'lucide-react';
@@ -20,31 +20,17 @@ const Footer = () => {
   useGSAP(() => {
     if (!container.current) return;
 
-    // Reveal Title
-    gsap.from(".footer-title", {
-      scrollTrigger: {
-        trigger: ".footer-title",
-        start: "top 90%",
-      },
-      opacity: 0,
-      y: 30,
-      duration: 1,
-      ease: "power3.out"
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.from(".footer-title", {
+        scrollTrigger: { trigger: ".footer-title", start: "top 90%" },
+        opacity: 0, y: 30, duration: 1, ease: "power3.out"
+      });
+      gsap.from(".social-icon", {
+        scrollTrigger: { trigger: ".social-container", start: "top 95%" },
+        opacity: 0, scale: 0.8, stagger: 0.1, duration: 0.6, ease: "power2.out"
+      });
     });
-
-    // Reveal Social Links
-    gsap.from(".social-icon", {
-      scrollTrigger: {
-        trigger: ".social-container",
-        start: "top 95%",
-      },
-      opacity: 0,
-      scale: 0.8,
-      stagger: 0.1,
-      duration: 0.6,
-      ease: "power2.out"
-    });
-
   }, { scope: container });
 
   return (

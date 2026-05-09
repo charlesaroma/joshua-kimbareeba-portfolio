@@ -30,7 +30,6 @@
   --radius-lg: 16px;
 }
 
-/* Global styles */
 html {
   scroll-behavior: smooth;
 }
@@ -51,19 +50,37 @@ a {
   @apply bg-accent text-white;
 }
 
-/* Utility Classes */
+.text-stroke {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
+.text-stroke-sm {
+  -webkit-text-stroke: 1px currentColor;
+  color: transparent;
+}
+
 .glass-card {
   @apply bg-white/80 backdrop-blur-[10px] border border-white/20 shadow-md;
 }
 
 .btn-primary {
-  @apply bg-accent text-white px-6 py-3 rounded-sm font-semibold transition-all duration-200 cursor-pointer hover:opacity-90 hover:-translate-y-px active:translate-y-0;
+  @apply bg-accent text-white px-8 py-4 rounded-lg font-semibold transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-3 hover:opacity-90 hover:-translate-y-px active:translate-y-0;
 }
 
 .btn-secondary {
-  @apply bg-transparent text-primary border-2 border-primary px-6 py-3 rounded-sm font-semibold transition-all duration-200 cursor-pointer hover:bg-primary/5 hover:-translate-y-px active:translate-y-0;
+  @apply bg-transparent text-primary border-2 border-primary/20 px-8 py-4 rounded-lg font-semibold transition-all duration-200 cursor-pointer inline-flex items-center justify-center gap-3 hover:bg-primary/5 hover:border-primary/40 hover:-translate-y-px active:translate-y-0;
 }
 
 .card-hover {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
