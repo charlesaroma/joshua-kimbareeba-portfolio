@@ -4,9 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import {
   Server,
-  Layout,
   Database,
-  Globe,
   Zap,
   Cpu,
   Terminal,

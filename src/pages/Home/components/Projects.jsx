@@ -13,6 +13,7 @@ const Projects = () => {
   const projects = [
     {
       title: "Alero REST API Suite",
+      category: "Backend Architecture",
       description:
         "Engineered a suite of high-performance Node.js REST APIs with MongoDB and Prisma, focusing on scalability and speed.",
       tags: ["Node.js", "Express", "MongoDB", "Prisma"],
@@ -23,6 +24,7 @@ const Projects = () => {
     },
     {
       title: "Cross-Platform Mobile App",
+      category: "Mobile Development",
       description:
         "Built a cross-platform mobile application with Flutter and React Native, featuring real-time sync and offline support.",
       tags: ["Flutter", "React Native", "Dart", "Firebase"],
@@ -33,6 +35,7 @@ const Projects = () => {
     },
     {
       title: "Desktop App with Electron",
+      category: "Desktop Development",
       description:
         "Developed a cross-platform desktop application using Electron, React, and Prisma for local-first data management.",
       tags: ["Electron", "React", "Prisma", "SQLite"],
@@ -180,7 +183,9 @@ const Projects = () => {
                 className={`lg:col-span-5 flex flex-col gap-8 ${index % 2 !== 0 ? "lg:order-1" : ""}`}
               >
                 <div>
-
+                  <span className="font-heading font-bold text-accent uppercase tracking-[0.3em] text-[10px] mb-4 block">
+                    {project.category}
+                  </span>
                   <h3 className="text-4xl md:text-5xl font-black uppercase text-primary leading-none mb-6 group-hover:text-accent transition-colors">
                     {project.title}
                   </h3>
