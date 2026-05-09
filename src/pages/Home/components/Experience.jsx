@@ -1,61 +1,96 @@
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { Server, Layout, Database, Globe, Zap, Cpu, Terminal } from 'lucide-react';
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import {
+  Server,
+  Layout,
+  Database,
+  Globe,
+  Zap,
+  Cpu,
+  Terminal,
+} from "lucide-react";
 
 const experiences = [
   {
-    company: 'Epiphanies in Motion',
-    role: 'Senior Developer',
-    period: 'April 2019 – Present',
-    description: 'Leading technical initiatives and building high-performance web applications with scalable architecture.',
-    skills: ['Architecture', 'Scaling', 'Full-Stack']
+    company: "Epiphanies in Motion",
+    role: "Senior Developer",
+    period: "April 2019 – Present",
+    description:
+      "Leading technical initiatives and building high-performance web applications with scalable architecture.",
+    skills: ["Architecture", "Scaling", "Full-Stack"],
   },
   {
-    company: 'Alero (Digital Branding & Software Development)',
-    role: 'Software Developer',
-    period: 'Freelance / Contract',
-    description: 'Building robust REST APIs with Node.js and driving digital branding strategies for diverse clients.',
-    skills: ['REST API', 'Node.js', 'Branding']
-  }
+    company: "Alero (Digital Branding & Software Development)",
+    role: "Software Developer",
+    period: "Freelance / Contract",
+    description:
+      "Building robust REST APIs with Node.js and driving digital branding strategies for diverse clients.",
+    skills: ["REST API", "Node.js", "Branding"],
+  },
 ];
 
 const techStack = [
-  { name: 'Node.js', icon: Server, level: 'Expert' },
-  { name: 'REST API', icon: Database, level: 'Advanced' },
-  { name: 'Web Design', icon: Globe, level: 'Advanced' },
-  { name: 'UI/UX Design', icon: Layout, level: 'Advanced' },
-  { name: 'Digital Branding', icon: Zap, level: 'Expert' },
-  { name: 'Architecture', icon: Cpu, level: 'Advanced' },
+  { name: "Node.js", icon: Server, level: "Expert" },
+  { name: "REST API", icon: Database, level: "Advanced" },
+  { name: "Web Design", icon: Globe, level: "Advanced" },
+  { name: "UI/UX Design", icon: Layout, level: "Advanced" },
+  { name: "Digital Branding", icon: Zap, level: "Expert" },
+  { name: "Architecture", icon: Cpu, level: "Advanced" },
 ];
 
 const Experience = () => {
   const container = useRef();
 
-  useGSAP(() => {
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.from(".exp-title", {
-        scrollTrigger: { trigger: ".exp-title", start: "top 80%" },
-        opacity: 0, y: 50, duration: 1, ease: "power4.out"
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.from(".exp-title", {
+          scrollTrigger: { trigger: ".exp-title", start: "top 80%" },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power4.out",
+        });
+        gsap.from(".timeline-item", {
+          scrollTrigger: { trigger: ".timeline-container", start: "top 70%" },
+          opacity: 0,
+          x: -30,
+          stagger: 0.3,
+          duration: 1,
+          ease: "power3.out",
+        });
+        gsap.from(".skill-card", {
+          scrollTrigger: { trigger: ".skills-grid", start: "top 80%" },
+          opacity: 0,
+          scale: 0.9,
+          y: 20,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "back.out(1.7)",
+        });
+        gsap.from(".timeline-line", {
+          scrollTrigger: {
+            trigger: ".timeline-container",
+            start: "top 70%",
+            end: "bottom 70%",
+            scrub: 1,
+          },
+          scaleY: 0,
+          transformOrigin: "top center",
+        });
       });
-      gsap.from(".timeline-item", {
-        scrollTrigger: { trigger: ".timeline-container", start: "top 70%" },
-        opacity: 0, x: -30, stagger: 0.3, duration: 1, ease: "power3.out"
-      });
-      gsap.from(".skill-card", {
-        scrollTrigger: { trigger: ".skills-grid", start: "top 80%" },
-        opacity: 0, scale: 0.9, y: 20, stagger: 0.1, duration: 0.8, ease: "back.out(1.7)"
-      });
-      gsap.from(".timeline-line", {
-        scrollTrigger: { trigger: ".timeline-container", start: "top 70%", end: "bottom 70%", scrub: 1 },
-        scaleY: 0, transformOrigin: "top center"
-      });
-    });
-  }, { scope: container });
+    },
+    { scope: container },
+  );
 
   return (
-    <section ref={container} id="experience" className="py-32 bg-bg relative overflow-hidden">
+    <section
+      ref={container}
+      id="experience"
+      className="py-32 bg-bg relative overflow-hidden"
+    >
       {/* Decorative Background Element */}
       <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[120px] pointer-events-none"></div>
 
@@ -75,13 +110,13 @@ const Experience = () => {
 
             <div className="timeline-container relative pl-8 md:pl-12">
               {/* Vertical Progress Line */}
-              <div className="timeline-line absolute left-0 top-0 w-[2px] h-full bg-gradient-to-b from-accent via-accent/50 to-primary/5"></div>
+              <div className="timeline-line absolute left-0 top-0 w-[2px] h-full bg-linear-to-b from-accent via-accent/50 to-primary/5"></div>
 
               <div className="space-y-16">
                 {experiences.map((exp, index) => (
                   <div key={index} className="timeline-item relative">
                     {/* Node */}
-                    <div className="absolute -left-[35px] md:-left-[51px] top-0 w-4 h-4 md:w-6 md:h-6 rounded-full bg-bg border-4 border-accent shadow-[0_0_15px_rgba(37,99,235,0.4)] z-20"></div>
+                    <div className="absolute left-[-35px] md:left-[-51px] top-0 w-4 h-4 md:w-6 md:h-6 rounded-full bg-bg border-4 border-accent shadow-[0_0_15px_rgba(37,99,235,0.4)] z-20"></div>
 
                     <div className="flex flex-col gap-4">
                       <span className="px-3 py-1 bg-accent/10 text-accent font-heading font-bold text-[10px] uppercase tracking-widest rounded-full w-fit">
@@ -103,7 +138,10 @@ const Experience = () => {
 
                       <div className="flex flex-wrap gap-2 mt-4">
                         {exp.skills.map((skill, i) => (
-                          <span key={i} className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/40 border border-primary/10 px-3 py-1 rounded-sm">
+                          <span
+                            key={i}
+                            className="text-[10px] font-black uppercase tracking-[0.2em] text-primary/40 border border-primary/10 px-3 py-1 rounded-sm"
+                          >
                             {skill}
                           </span>
                         ))}
@@ -121,7 +159,7 @@ const Experience = () => {
               <div className="mb-12">
                 <h3 className="text-2xl font-black uppercase tracking-tighter text-primary flex items-center gap-4">
                   Technical Mastery
-                  <span className="h-px flex-grow bg-primary/10"></span>
+                  <span className="h-px grow bg-primary/10"></span>
                 </h3>
               </div>
 
@@ -160,9 +198,15 @@ const Experience = () => {
                   <Terminal size={80} />
                 </div>
                 <div className="relative z-10">
-                  <p className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-2">Available for hire</p>
-                  <h4 className="text-xl font-black uppercase leading-tight mb-4">Let's build something <br /> extraordinary together</h4>
-                  <a href="#contact" className="btn-primary text-sm">Get in touch</a>
+                  <p className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-2">
+                    Available for hire
+                  </p>
+                  <h4 className="text-xl font-black uppercase leading-tight mb-4">
+                    Let's build something <br /> extraordinary together
+                  </h4>
+                  <a href="#contact" className="btn-primary text-sm">
+                    Get in touch
+                  </a>
                 </div>
               </div>
             </div>

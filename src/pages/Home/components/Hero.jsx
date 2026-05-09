@@ -1,65 +1,85 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
   const container = useRef();
 
   useGSAP(() => {
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const tl = gsap.timeline();
-      tl.from(".hero-label", { opacity: 0, y: 20, duration: 0.8, ease: "power3.out" })
-        .from(".hero-title", { opacity: 0, y: 40, duration: 1, ease: "power4.out" }, "-=0.4")
-        .from(".hero-description", { opacity: 0, y: 20, duration: 0.8, ease: "power3.out" }, "-=0.6")
-        .from(".hero-cta", { opacity: 0, y: 20, duration: 0.8, stagger: 0.2, ease: "power2.out" }, "-=0.4");
+    gsap.from('.hero-content > *', {
+      opacity: 0,
+      y: 24,
+      stagger: 0.12,
+      duration: 0.8,
+      ease: 'power3.out',
     });
   }, { scope: container });
 
   return (
     <section
       ref={container}
-      id="home"
-      className="relative h-screen flex flex-col justify-center items-center overflow-hidden bg-primary"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-primary px-6 py-20"
     >
-      {/* Background Decorative Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/90 via-primary/50 to-primary"></div>
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/10 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-1/4 -right-32 w-80 h-80 bg-accent/5 rounded-full blur-[100px]"></div>
-      </div>
+      {/* Background Grid */}
+      <div
+        className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+        }}
+      />
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center justify-center">
-        <div className="max-w-4xl mx-auto flex flex-col items-center gap-4 text-center">
-          <p className="hero-label font-heading font-bold uppercase tracking-[0.3em] text-accent text-sm md:text-base">
-            Building the Digital Future
-          </p>
+      {/* Hero Content */}
+      <div className="hero-content relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
 
-          <h1 className="hero-title text-5xl md:text-7xl lg:text-8xl font-black leading-tight tracking-tighter text-white uppercase">
-            SOFTWARE <br />
-            <span className="text-stroke text-white">ARCHITECT</span>
-          </h1>
+        {/* Label */}
+        <span className="mb-6 font-heading text-[9px] font-bold uppercase tracking-[0.35em] text-accent">
+          Building the Digital Future
+        </span>
 
-          <p className="hero-description text-base md:text-lg text-white/60 max-w-xl leading-relaxed">
-            Backend systems. Frontend experiences. Built to last.
-          </p>
+        {/* Main Heading */}
+        <h1 className="text-5xl font-black uppercase tracking-[-0.05em] text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
+          SOFTWARE
+          <span className="block bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
+            ARCHITECT
+          </span>
+        </h1>
 
-          <div className="hero-cta flex flex-wrap items-center justify-center gap-4 mt-6">
-            <a href="#projects" className="btn-primary shadow-lg shadow-accent/20">
-              <span>Explore Projects</span>
-              <ArrowRight size={20} />
-            </a>
-            <a href="#contact" className="btn-secondary !text-white !border-white/20 hover:!border-white/40">
-              Get in Touch
-            </a>
-          </div>
+        {/* Accent Line */}
+        <div className="my-6 h-[2px] w-12 bg-accent" />
+
+        {/* Description */}
+        <p className="text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
+          Scalable backend systems. High-performance frontend experiences.
+          Engineered for the modern web.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
+          <a
+            href="#projects"
+            className="flex items-center gap-2 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white"
+          >
+            Explore Projects
+            <ArrowRight size={16} />
+          </a>
+
+          <a
+            href="#contact"
+            className="border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white"
+          >
+            Get in Touch
+          </a>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-        <ChevronDown size={20} className="text-white/30 animate-bounce" />
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-20">
+        <div className="h-8 w-px bg-white" />
       </div>
     </section>
   );

@@ -156,7 +156,7 @@ const Projects = () => {
             >
               {/* Project Image Side */}
               <div
-                className={`lg:col-span-7 overflow-hidden rounded-3xl relative aspect-[16/10] bg-primary/5 ${index % 2 !== 0 ? "lg:order-2" : ""}`}
+                className={`lg:col-span-7 overflow-hidden rounded-3xl relative aspect-16/10 bg-primary/5 ${index % 2 !== 0 ? "lg:order-2" : ""}`}
               >
                 <img
                   src={project.image}
