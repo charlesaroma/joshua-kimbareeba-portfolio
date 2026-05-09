@@ -63,7 +63,7 @@ const Hero = () => {
             className="flex w-44 items-center justify-center gap-2 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white cursor-pointer"
           >
             Projects
-            <ArrowRight size={16} />
+           <ArrowRight size={16} />
           </button>
 
           <button
