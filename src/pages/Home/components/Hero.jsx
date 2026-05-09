@@ -51,7 +51,7 @@ const Hero = () => {
         </h1>
 
         {/* Description */}
-        <p className="text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
+        <p className="mt-6 text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
           Mobile &amp; desktop apps. Scalable backends &amp; databases.
           Engineered for the modern stack.
         </p>
