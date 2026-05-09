@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ArrowRight } from 'lucide-react';
 
 const Hero = () => {
@@ -42,9 +43,9 @@ const Hero = () => {
         </span>
 
         {/* Main Heading */}
-        <h1 className="text-5xl font-black uppercase tracking-[-0.05em] text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
+        <h1 className="text-5xl font-black uppercase tracking-tighter text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
           SOFTWARE
-          <span className="block bg-gradient-to-b from-white to-white/40 bg-clip-text text-transparent">
+          <span className="block bg-linear-to-b from-white to-white/40 bg-clip-text text-transparent">
             ARCHITECT
           </span>
         </h1>
@@ -60,20 +61,20 @@ const Hero = () => {
 
         {/* CTA Buttons */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
-          <a
-            href="#projects"
-            className="flex items-center gap-2 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white"
+          <button
+            onClick={() => ScrollSmoother.get()?.scrollTo('#projects')}
+            className="flex items-center gap-2 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white cursor-pointer"
           >
             Explore Projects
             <ArrowRight size={16} />
-          </a>
+          </button>
 
-          <a
-            href="#contact"
-            className="border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white"
+          <button
+            onClick={() => ScrollSmoother.get()?.scrollTo('#contact')}
+            className="border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white cursor-pointer"
           >
             Get in Touch
-          </a>
+          </button>
         </div>
       </div>
 

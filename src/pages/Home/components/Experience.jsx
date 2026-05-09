@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
 import {
   Server,
   Layout,
@@ -204,9 +205,9 @@ const Experience = () => {
                   <h4 className="text-xl font-black uppercase leading-tight mb-4">
                     Let's build something <br /> extraordinary together
                   </h4>
-                  <a href="#contact" className="btn-primary text-sm">
+                  <button onClick={() => ScrollSmoother.get()?.scrollTo('#contact')} className="btn-primary text-sm cursor-pointer">
                     Get in touch
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

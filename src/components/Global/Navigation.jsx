@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { Menu, X, Github, Linkedin } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const scrollTo = (id) => {
+    setIsOpen(false);
+    setTimeout(() => ScrollSmoother.get()?.scrollTo(id), 100);
+  };
 
   const navLinks = [
     { name: 'Home', href: '#home' },
@@ -30,14 +36,14 @@ const Navigation = () => {
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center space-x-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.name}
-              href={link.href}
-              className="font-heading text-sm font-bold uppercase tracking-widest hover:text-accent transition-colors relative group"
+              onClick={() => scrollTo(link.href)}
+              className="font-heading text-sm font-bold uppercase tracking-widest hover:text-accent transition-colors relative group cursor-pointer"
             >
               {link.name}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </button>
           ))}
           <div className="flex items-center space-x-4 border-l border-primary/10 pl-8">
             <a href="https://github.com/joshbaz" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
@@ -69,14 +75,13 @@ const Navigation = () => {
           >
             <div className="flex flex-col items-center space-y-6 py-10 px-6">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  className="text-3xl font-heading font-black uppercase tracking-tighter hover:text-accent transition-colors"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => scrollTo(link.href)}
+                  className="text-3xl font-heading font-black uppercase tracking-tighter hover:text-accent transition-colors cursor-pointer"
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
               <div className="flex space-x-6 pt-6 border-t border-primary/5 w-full justify-center">
                 <a href="https://github.com/joshbaz" target="_blank" rel="noopener noreferrer" className="p-4 rounded-xl bg-primary/5 hover:bg-accent hover:text-white transition-all duration-300">
