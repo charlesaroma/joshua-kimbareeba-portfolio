@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { animate, createScope, onScroll, splitText, stagger, createTimer } from 'animejs';
 
 const philosophyItems = [
@@ -25,6 +25,8 @@ const AnimeShowcase = () => {
   const root = useRef(null);
   const scope = useRef(null);
   const counterRef = useRef(null);
+  const contentRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     if (!root.current) return;
@@ -42,70 +44,21 @@ const AnimeShowcase = () => {
         ease: 'linear',
       });
 
-      // --- Section heading: split text reveal ---
-      splitText('.showcase-heading', { chars: true })
-        .addEffect(({ chars }) => animate(chars, {
-          opacity: { from: 0 },
-          translateY: { from: '120%' },
-          rotateX: { from: -40 },
-          delay: stagger(20),
-          duration: 800,
-          ease: 'out(4)',
-          autoplay: onScroll({ target: root.current }),
-        }));
-
-      // --- Philosophy items: per-item scroll trigger ---
-      const items = root.current.querySelectorAll('.philosophy-item');
-      items.forEach((item) => {
-        // Split and animate the philosophy text
-        const textEl = item.querySelector('.philosophy-text');
-        if (textEl) {
-          splitText(textEl, { words: true })
-            .addEffect(({ words }) => animate(words, {
-              opacity: { from: 0 },
-              translateY: { from: '1.5rem' },
-              delay: stagger(40),
-              duration: 600,
-              ease: 'out(3)',
-              autoplay: onScroll({ target: item }),
-            }));
-        }
-
-        // Animate the number
-        const numberEl = item.querySelector('.philosophy-number');
-        if (numberEl) {
-          animate(numberEl, {
+      // --- Section heading: split text reveal using addEffect() ---
+      const heading = root.current.querySelector('.showcase-heading');
+      if (heading) {
+        // Using addEffect ensures it runs after fonts are ready
+        splitText(heading, { chars: true })
+          .addEffect(({ chars }) => animate(chars, {
             opacity: { from: 0 },
-            scale: { from: 0.5 },
+            translateY: { from: '120%' },
+            rotateX: { from: -40 },
+            delay: stagger(20),
             duration: 800,
             ease: 'out(4)',
-            autoplay: onScroll({ target: item }),
-          });
-        }
-
-        // Animate the title
-        const titleEl = item.querySelector('.philosophy-title');
-        if (titleEl) {
-          animate(titleEl, {
-            opacity: { from: 0 },
-            translateX: { from: '-2rem' },
-            duration: 700,
-            ease: 'out(4)',
-            autoplay: onScroll({ target: item }),
-          });
-        }
-
-        // Animate the decorative line
-        const lineEl = item.querySelector('.philosophy-line');
-        if (lineEl) {
-          animate(lineEl, {
-            scaleX: { from: 0 },
-            duration: 1000,
-            ease: 'out(4)',
-            autoplay: onScroll({ target: item }),
-          });
-        }
-      });
+            autoplay: onScroll({ target: root.current }),
+          }));
+      }
 
       // --- Scroll progress counter ---
       if (counterRef.current) {
@@ -135,6 +88,29 @@ const AnimeShowcase = () => {
     return () => scope.current?.revert();
   }, []);
 
+  // Polished transition for philosophy items
+  const handleItemClick = (index) => {
+    if (index === activeIndex) return;
+
+    // Fade out current content
+    animate(contentRef.current, {
+      opacity: 0,
+      translateY: -20,
+      duration: 300,
+      ease: 'in(2)',
+      onComplete: () => {
+        setActiveIndex(index);
+        // Fade in new content
+        animate(contentRef.current, {
+          opacity: [0, 1],
+          translateY: [20, 0],
+          duration: 600,
+          ease: 'out(4)'
+        });
+      }
+    });
+  };
+
   return (
     <section
       ref={root}
@@ -158,7 +134,6 @@ const AnimeShowcase = () => {
       {/* Marquee Band */}
       <div className="pointer-events-none select-none border-y border-white/5 py-5 overflow-hidden">
         <div className="marquee-track flex whitespace-nowrap" style={{ width: 'max-content' }}>
-          {/* Duplicate for seamless loop */}
           {[0, 1].map((i) => (
             <span
               key={i}
@@ -177,44 +152,59 @@ const AnimeShowcase = () => {
             Engineering Philosophy
           </span>
           <h2
-            className="showcase-heading text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] text-white"
+            className="showcase-heading w-full text-4xl md:text-6xl font-black tracking-tighter uppercase leading-tight text-white"
             style={{ perspective: '600px' }}
           >
             BUILD WITH
             <span
               className="block text-transparent"
-              style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.5)' }}
+              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)' }}
             >
               PURPOSE
             </span>
           </h2>
         </div>
 
-        {/* Philosophy Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-          {philosophyItems.map((item, i) => (
-            <div key={i} className="philosophy-item group">
-              {/* Number */}
-              <span className="philosophy-number block text-8xl font-black text-accent/10 leading-none mb-4 group-hover:text-accent/20 transition-colors duration-500">
-                {item.number}
-              </span>
+        {/* Interactive Showcase */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          {/* Navigation/Indicators */}
+          <div className="lg:col-span-4 flex lg:flex-col gap-6 overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 scrollbar-hide">
+            {philosophyItems.map((item, i) => (
+              <button
+                key={i}
+                onClick={() => handleItemClick(i)}
+                className={`group flex items-center gap-8 transition-all duration-500 text-left cursor-pointer ${
+                  activeIndex === i ? 'opacity-100' : 'opacity-30 hover:opacity-50'
+                }`}
+              >
+                <span className={`text-4xl md:text-5xl font-black leading-none transition-colors duration-500 ${
+                  activeIndex === i ? 'text-accent' : 'text-white'
+                }`}>
+                  {item.number}
+                </span>
+                <span className={`hidden md:block text-xs font-black uppercase tracking-[0.4em] transition-all duration-500 ${
+                  activeIndex === i ? 'translate-x-2 text-white' : 'text-white/40'
+                }`}>
+                  {item.title}
+                </span>
+              </button>
+            ))}
+          </div>
 
-              {/* Title */}
-              <h3 className="philosophy-title text-2xl font-black uppercase tracking-tight text-white mb-4">
-                {item.title}
-              </h3>
-
-              {/* Decorative Line */}
+          {/* Active Content */}
+          <div className="lg:col-span-8 lg:pl-12 w-full">
+            <div ref={contentRef} className="relative min-h-[300px] w-full">
               <div
-                className="philosophy-line h-px w-full bg-linear-to-r from-accent via-accent/30 to-transparent mb-6 origin-left"
+                className="philosophy-line h-px w-full bg-linear-to-r from-accent via-accent/30 to-transparent mb-12 origin-left"
               />
-
-              {/* Description */}
-              <p className="philosophy-text text-base font-medium leading-relaxed text-white/50">
-                {item.text}
+              <h3 className="philosophy-title w-full text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-8">
+                {philosophyItems[activeIndex].title}
+              </h3>
+              <p className="philosophy-text w-full text-lg md:text-xl font-medium leading-tight text-white/70">
+                {philosophyItems[activeIndex].text}
               </p>
             </div>
-          ))}
+          </div>
         </div>
       </div>
 

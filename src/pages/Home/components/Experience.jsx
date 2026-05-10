@@ -106,7 +106,7 @@ const Experience = () => {
               <span className="font-heading font-bold text-accent uppercase tracking-[0.4em] text-xs mb-4 block">
                 Professional Path
               </span>
-              <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] text-primary">
+              <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase leading-tight text-primary">
                 WORK <br />
                 <span className="text-stroke text-primary">EXPERIENCE</span>
               </h2>
@@ -136,7 +136,7 @@ const Experience = () => {
                         </p>
                       </div>
 
-                      <p className="text-lg text-secondary/70 w-full max-w-2xl leading-relaxed font-medium">
+                      <p className="text-sm md:text-base text-secondary/70 w-full leading-snug font-medium">
                         {exp.description}
                       </p>
 

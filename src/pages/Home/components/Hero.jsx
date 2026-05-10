@@ -1,28 +1,79 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ArrowRight } from 'lucide-react';
-import AnimatedText from '../../../components/Animations/AnimatedText';
+import { animate, splitText, stagger, scrambleText } from 'animejs';
+
+const roles = ['ARCHITECT', 'DEVELOPER', 'ENGINEER', 'STRATEGIST'];
 
 const Hero = () => {
   const container = useRef();
+  const softwareRef = useRef();
+  const roleRef = useRef();
+  const [roleIndex, setRoleIndex] = useState(0);
 
   useGSAP(() => {
+    // Initial reveal of elements
     gsap.fromTo('.hero-content > *', 
-      {
-        opacity: 0,
-        y: 24,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.12,
-        duration: 0.8,
-        ease: 'power3.out',
-      }
+      { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, stagger: 0.12, duration: 0.8, ease: 'power3.out' }
     );
   }, { scope: container });
+
+  // Main Heading "SOFTWARE" Effect using splitText.addEffect()
+  useEffect(() => {
+    if (!softwareRef.current) return;
+
+    const split = splitText(softwareRef.current, { chars: true });
+    
+    // Applying the user-requested bounce/rotate effect
+    split.addEffect(({ chars }) => animate(chars, {
+      y: [
+        { to: '-1.5rem', ease: 'outExpo', duration: 600 },
+        { to: 0, ease: 'outBounce', duration: 800, delay: 100 }
+      ],
+      rotate: { from: '-1turn', delay: 0 },
+      delay: stagger(50),
+      ease: 'inOutCirc',
+      loopDelay: 2000,
+      loop: true
+    }));
+
+    return () => split.revert();
+  }, []);
+
+  // Cycling roles with scrambleText
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Fade out current role
+      animate(roleRef.current, {
+        opacity: [1, 0],
+        translateY: -10,
+        duration: 300,
+        ease: 'in(2)',
+        onComplete: () => {
+          setRoleIndex((prev) => (prev + 1) % roles.length);
+        }
+      });
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Animate the NEW word with scrambleText
+  useEffect(() => {
+    if (!roleRef.current) return;
+    
+    // Scramble reveal animation
+    animate(roleRef.current, {
+      opacity: [0, 1],
+      translateY: [10, 0],
+      innerHTML: scrambleText(roles[roleIndex]),
+      duration: 1000,
+      ease: 'out(3)'
+    });
+  }, [roleIndex]);
 
   return (
     <section
@@ -44,59 +95,47 @@ const Hero = () => {
 
       {/* Hero Content */}
       <div className="hero-content relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
-
         {/* Label */}
         <span className="mb-6 font-heading text-[9px] font-bold uppercase tracking-[0.35em] text-accent">
           Building the Digital Future
         </span>
 
-        {/* Main Heading — Two separate AnimatedText for proper splitting */}
-        <div className="overflow-hidden">
-          <AnimatedText
-            as="h1"
-            splitBy="chars"
-            animation="reveal"
-            scrollTriggered={false}
-            staggerDelay={30}
-            duration={900}
-            className="text-5xl font-black uppercase tracking-tighter text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl"
+        {/* Main Heading "SOFTWARE" */}
+        <div className="mb-2">
+          <h1 
+            ref={softwareRef}
+            className="text-4xl font-black uppercase tracking-tighter text-white leading-none sm:text-5xl md:text-6xl lg:text-8xl"
           >
             SOFTWARE
-          </AnimatedText>
+          </h1>
         </div>
-        <div className="overflow-hidden">
-          <AnimatedText
-            as="span"
-            splitBy="chars"
-            animation="reveal"
-            scrollTriggered={false}
-            staggerDelay={35}
-            duration={1000}
-            className="block text-5xl font-black uppercase tracking-tighter leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl bg-linear-to-b from-white to-white/40 bg-clip-text text-transparent"
+        
+        <div className="relative h-[1.2em] w-full flex items-center justify-center">
+          <span 
+            ref={roleRef}
+            className="block text-4xl font-black uppercase tracking-tighter leading-none sm:text-5xl md:text-6xl lg:text-8xl text-transparent"
+            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)' }}
           >
-            ARCHITECT
-          </AnimatedText>
+            {roles[roleIndex]}
+          </span>
         </div>
 
-        {/* Description */}
-        <p className="mt-6 text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
-          Mobile &amp; desktop apps. Scalable backends &amp; databases.
-          Engineered for the modern stack.
+        <p className="mt-12 text-center text-sm md:text-base leading-snug text-white/60 w-full max-w-4xl mx-auto">
+          Full-stack architectures for web, mobile, and desktop. Engineered for performance, scalability, and impact.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-5">
+        <div className="mt-8 flex items-center justify-center gap-4">
           <button
             onClick={() => ScrollSmoother.get()?.scrollTo('#projects')}
-            className="flex w-44 items-center justify-center gap-2 bg-white px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white cursor-pointer"
+            className="flex min-w-[140px] items-center justify-center gap-2 bg-white px-5 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white cursor-pointer"
           >
             Projects
-           <ArrowRight size={16} />
+           <ArrowRight size={14} />
           </button>
 
           <button
             onClick={() => ScrollSmoother.get()?.scrollTo('#contact')}
-            className="flex w-44 items-center justify-center border border-white/20 px-6 py-3 text-[10px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white cursor-pointer"
+            className="flex min-w-[140px] items-center justify-center border border-white/20 px-5 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white cursor-pointer"
           >
             Get in Touch
           </button>
@@ -105,7 +144,7 @@ const Hero = () => {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 opacity-20">
-        <div className="h-8 w-px bg-white" />
+        <div className="h-8 w-px bg-white animate-pulse" />
       </div>
     </section>
   );

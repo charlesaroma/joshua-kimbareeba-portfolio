@@ -41,7 +41,7 @@ const Footer = () => {
               onClick={scrollToTop}
               className="group flex items-center gap-4 font-heading text-xs font-black uppercase tracking-[0.4em] text-white/40 hover:text-white transition-all cursor-pointer"
             >
-              <span>Top</span>
+              <span>Back to start</span>
               <div className="w-12 h-12 rounded-full bg-white/3 border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:text-white group-hover:-translate-y-2 transition-all duration-500">
                 <ArrowUp size={20} />
               </div>

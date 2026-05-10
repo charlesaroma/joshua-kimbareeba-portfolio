@@ -50,25 +50,36 @@ const Projects = () => {
   const { contextSafe } = useGSAP({ scope: container });
   const scrollScope = useRef(null);
 
+  // Anime.js: per-card parallax on project images
   useEffect(() => {
+    if (!container.current) return;
+
     const mm = window.matchMedia('(prefers-reduced-motion: no-preference)');
     if (!mm.matches) return;
 
     scrollScope.current = createScope({ root: container }).add(() => {
-      animate('.project-img', {
-        translateY: ['-5%', '5%'],
-        ease: 'linear',
-        duration: 2000,
-        autoplay: onScroll({
-          target: container.current,
-          sync: 'playhead',
-        }),
+      // Target each project card's image container individually
+      const cards = container.current.querySelectorAll('.project-card');
+      cards.forEach((card) => {
+        const imgWrap = card.querySelector('.project-img-wrap');
+        if (!imgWrap) return;
+
+        animate(imgWrap, {
+          translateY: ['-3%', '3%'],
+          ease: 'linear',
+          duration: 2000,
+          autoplay: onScroll({
+            target: card,
+            sync: 'playhead',
+          }),
+        });
       });
     });
 
     return () => scrollScope.current?.revert();
   }, []);
 
+  // GSAP: hover interactions (contextSafe for cleanup)
   const onProjectEnter = contextSafe((e) => {
     const img = e.currentTarget.querySelector(".project-img");
     const overlay = e.currentTarget.querySelector(".project-overlay");
@@ -83,6 +94,7 @@ const Projects = () => {
     gsap.to(overlay, { opacity: 0, duration: 0.4 });
   });
 
+  // GSAP: scroll-triggered card reveals
   useGSAP(
     () => {
       // Title Animation
@@ -136,11 +148,11 @@ const Projects = () => {
             <span className="font-heading font-bold text-accent uppercase tracking-[0.4em] text-xs mb-4 block">
               Selected Works
             </span>
-            <h2 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] text-primary">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase leading-tight text-primary">
               NOTABLE <br />
               <span
                 className="text-transparent"
-                style={{ WebkitTextStroke: "1.5px var(--color-primary)" }}
+                style={{ WebkitTextStroke: "1px var(--color-primary)" }}
               >
                 PROJECTS
               </span>
@@ -176,11 +188,14 @@ const Projects = () => {
               <div
                 className={`lg:col-span-7 overflow-hidden rounded-3xl relative aspect-16/10 bg-primary/5 ${index % 2 !== 0 ? "lg:order-2" : ""}`}
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-img w-full h-full object-cover transition-all duration-700 grayscale hover:grayscale-0"
-                />
+                {/* Anime.js parallax targets this wrapper */}
+                <div className="project-img-wrap w-full h-full">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="project-img w-full h-full object-cover transition-all duration-700 grayscale hover:grayscale-0"
+                  />
+                </div>
                 <div className="project-overlay absolute inset-0 bg-primary/40 opacity-0 flex items-center justify-center backdrop-blur-[2px] transition-all duration-500">
                   <div className="flex gap-4">
                     <a

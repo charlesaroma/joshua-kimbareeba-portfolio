@@ -2,6 +2,8 @@ import { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Github, Linkedin, Facebook, Youtube, Mail, MapPin } from 'lucide-react';
+import AnimatedText from '../../../components/Animations/AnimatedText';
+import ScrollRevealSection from '../../../components/Animations/ScrollRevealSection';
 
 const Contact = () => {
   const container = useRef();
@@ -14,17 +16,16 @@ const Contact = () => {
   ];
 
   useGSAP(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!container.current) return;
 
-    gsap.from(".contact-title", {
-      scrollTrigger: { trigger: ".contact-title", start: "top 85%" },
-      opacity: 0, y: 30, duration: 1, ease: "power3.out"
+    const mm = gsap.matchMedia();
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.from(".social-icon", {
+        scrollTrigger: { trigger: ".social-container", start: "top 95%" },
+        opacity: 0, scale: 0.8, stagger: 0.1, duration: 0.6, ease: "power2.out"
+      });
     });
-    gsap.from(".social-icon", {
-      scrollTrigger: { trigger: ".social-container", start: "top 90%" },
-      opacity: 0, scale: 0.8, stagger: 0.1, duration: 0.6, ease: "power2.out"
-    });
-  }, { scope: container, dependencies: [] });
+  }, { scope: container });
 
   return (
     <section
@@ -41,11 +42,42 @@ const Contact = () => {
               <span className="font-heading font-bold text-accent uppercase tracking-[0.4em] text-xs mb-6 block">
                 Get in Touch
               </span>
-              <h2 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8] text-white">
-                LET'S BUILD <br />
-                <span className="text-transparent" style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.9)' }}>SOMETHING</span> <br />
+
+              {/* Reverted to old large sizes */}
+              <AnimatedText
+                as="h2"
+                splitBy="words"
+                animation="slideUp"
+                scrollTriggered={true}
+                staggerDelay={80}
+                duration={1000}
+                className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8] text-white"
+              >
+                LET'S BUILD
+              </AnimatedText>
+              <AnimatedText
+                as="h2"
+                splitBy="chars"
+                animation="wave"
+                scrollTriggered={true}
+                staggerDelay={25}
+                duration={900}
+                className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8] text-transparent"
+                style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.9)' }}
+              >
+                SOMETHING
+              </AnimatedText>
+              <AnimatedText
+                as="h2"
+                splitBy="chars"
+                animation="reveal"
+                scrollTriggered={true}
+                staggerDelay={40}
+                duration={800}
+                className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8] text-white"
+              >
                 ICONIC.
-              </h2>
+              </AnimatedText>
             </div>
 
             <div className="social-container flex flex-wrap gap-4">
@@ -65,8 +97,14 @@ const Contact = () => {
           </div>
 
           {/* Right Side: Contact Details */}
-          <div className="lg:col-span-4 flex flex-col gap-16 lg:items-end">
-            <div className="text-left lg:text-right">
+          <ScrollRevealSection
+            animation="fadeRight"
+            selector=".contact-detail"
+            staggerDelay={200}
+            duration={1000}
+            className="lg:col-span-4 flex flex-col gap-16 lg:items-end"
+          >
+            <div className="contact-detail text-left lg:text-right">
               <div className="flex items-center lg:flex-row-reverse gap-4 mb-4">
                 <div className="p-3 rounded-xl bg-accent/10 text-accent">
                   <MapPin size={22} />
@@ -76,7 +114,7 @@ const Contact = () => {
               <p className="text-2xl font-black text-white uppercase tracking-tight">Nairobi, Kenya <br /> Kampala, Uganda</p>
             </div>
 
-            <div className="text-left lg:text-right">
+            <div className="contact-detail text-left lg:text-right">
               <div className="flex items-center lg:flex-row-reverse gap-4 mb-4">
                 <div className="p-3 rounded-xl bg-accent/10 text-accent">
                   <Mail size={22} />
@@ -90,7 +128,7 @@ const Contact = () => {
                 joshuakimbareeba@gmail.com
               </a>
             </div>
-          </div>
+          </ScrollRevealSection>
         </div>
       </div>
     </section>
