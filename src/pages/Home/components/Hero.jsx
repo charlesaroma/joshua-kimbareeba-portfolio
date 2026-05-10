@@ -8,18 +8,25 @@ const Hero = () => {
   const container = useRef();
 
   useGSAP(() => {
-    gsap.from('.hero-content > *', {
-      opacity: 0,
-      y: 24,
-      stagger: 0.12,
-      duration: 0.8,
-      ease: 'power3.out',
-    });
+    gsap.fromTo('.hero-content > *', 
+      {
+        opacity: 0,
+        y: 24,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        stagger: 0.12,
+        duration: 0.8,
+        ease: 'power3.out',
+      }
+    );
   }, { scope: container });
 
   return (
     <section
       ref={container}
+      id='home'
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-primary px-6 py-20"
     >
       {/* Background Grid */}

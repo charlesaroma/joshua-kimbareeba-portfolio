@@ -34,7 +34,7 @@ const Projects = () => {
       github: "#",
     },
     {
-      title: "Desktop App with Electron",
+      title: "Desktop App",
       category: "Desktop Development",
       description:
         "Developed a cross-platform desktop application using Electron, React, and Prisma for local-first data management.",
