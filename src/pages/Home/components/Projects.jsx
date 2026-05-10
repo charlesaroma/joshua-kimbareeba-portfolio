@@ -1,6 +1,7 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { animate, createScope, onScroll } from "animejs";
 import {
   ArrowUpRight,
   Github,
@@ -47,6 +48,26 @@ const Projects = () => {
   ];
 
   const { contextSafe } = useGSAP({ scope: container });
+  const scrollScope = useRef(null);
+
+  useEffect(() => {
+    const mm = window.matchMedia('(prefers-reduced-motion: no-preference)');
+    if (!mm.matches) return;
+
+    scrollScope.current = createScope({ root: container }).add(() => {
+      animate('.project-img', {
+        translateY: ['-5%', '5%'],
+        ease: 'linear',
+        duration: 2000,
+        autoplay: onScroll({
+          target: container.current,
+          sync: 'playhead',
+        }),
+      });
+    });
+
+    return () => scrollScope.current?.revert();
+  }, []);
 
   const onProjectEnter = contextSafe((e) => {
     const img = e.currentTarget.querySelector(".project-img");

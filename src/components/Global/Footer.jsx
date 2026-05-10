@@ -1,119 +1,16 @@
-import { useRef } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import { Github, Linkedin, Facebook, Youtube, ArrowUp, Mail, MapPin, Code } from 'lucide-react';
+import { ArrowUp, Code } from 'lucide-react';
+import AnimatedText from '../Animations/AnimatedText';
 
 const Footer = () => {
-  const container = useRef();
-  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const socialLinks = [
-    { name: 'Github', icon: Github, url: 'https://github.com/joshbaz' },
-    { name: 'LinkedIn', icon: Linkedin, url: 'https://ug.linkedin.com/in/joshua-kimbareeba-03a005126' },
-    { name: 'Facebook', icon: Facebook, url: 'https://www.facebook.com/joshuakimbareeba' },
-    { name: 'YouTube', icon: Youtube, url: 'https://m.youtube.com/@kimbareebajoshua9298' },
-  ];
-
-  useGSAP(() => {
-    if (!container.current) return;
-
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.from(".footer-title", {
-        scrollTrigger: { trigger: ".footer-title", start: "top 90%" },
-        opacity: 0, y: 30, duration: 1, ease: "power3.out"
-      });
-      gsap.from(".social-icon", {
-        scrollTrigger: { trigger: ".social-container", start: "top 95%" },
-        opacity: 0, scale: 0.8, stagger: 0.1, duration: 0.6, ease: "power2.out"
-      });
-    });
-  }, { scope: container });
-
   return (
-    <footer 
-      ref={container}
-      id="contact" 
-      className="bg-primary text-bg py-32 relative overflow-hidden"
-    >
+    <footer className="bg-primary text-bg relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
-          
-          {/* Left Side: Call to Action */}
-          <div className="lg:col-span-8">
-            <div className="footer-title mb-16">
-              <span className="font-heading font-bold text-accent uppercase tracking-[0.4em] text-xs mb-6 block">
-                Get in Touch
-              </span>
-              <h2 className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter uppercase leading-[0.8] text-white">
-                LET'S BUILD <br />
-                <span className="text-transparent" style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.9)' }}>SOMETHING</span> <br />
-                ICONIC.
-              </h2>
-            </div>
-            
-            <div className="social-container flex flex-wrap gap-4">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-icon group p-6 rounded-3xl bg-white/[0.03] border border-white/10 hover:bg-accent hover:border-accent hover:-translate-y-2 transition-all duration-500 shadow-xl"
-                  aria-label={social.name}
-                >
-                  <social.icon size={28} className="group-hover:scale-110 transition-transform duration-500" />
-                </a>
-              ))}
-            </div>
-          </div>
-          
-          {/* Right Side: Contact Details */}
-          <div className="lg:col-span-4 flex flex-col gap-16 lg:items-end">
-            <div className="text-left lg:text-right">
-              <div className="flex items-center lg:flex-row-reverse gap-4 mb-4">
-                <div className="p-3 rounded-xl bg-accent/10 text-accent">
-                  <MapPin size={22} />
-                </div>
-                <p className="font-heading font-bold uppercase tracking-[0.3em] text-white/40 text-[10px]">Current Location</p>
-              </div>
-              <p className="text-2xl font-black text-white uppercase tracking-tight">Nairobi, Kenya <br /> Kampala, Uganda</p>
-            </div>
-
-            <div className="text-left lg:text-right">
-              <div className="flex items-center lg:flex-row-reverse gap-4 mb-4">
-                <div className="p-3 rounded-xl bg-accent/10 text-accent">
-                  <Mail size={22} />
-                </div>
-                <p className="font-heading font-bold uppercase tracking-[0.3em] text-white/40 text-[10px]">Direct Email</p>
-              </div>
-              <a 
-                href="mailto:joshuakimbareeba@gmail.com" 
-                className="text-2xl font-black text-white hover:text-accent transition-all duration-300 underline decoration-accent/30 decoration-2 underline-offset-[12px] hover:decoration-accent"
-              >
-                joshuakimbareeba@gmail.com
-              </a>
-            </div>
-
-            <div className="lg:mt-auto">
-               <button 
-                onClick={scrollToTop}
-                className="group flex items-center gap-6 font-heading text-xs font-black uppercase tracking-[0.4em] text-white/40 hover:text-white transition-all"
-               >
-                 <span>Back to start</span>
-                 <div className="w-16 h-16 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:text-white group-hover:-translate-y-2 transition-all duration-500">
-                    <ArrowUp size={24} />
-                 </div>
-               </button>
-            </div>
-          </div>
-        </div>
-
         {/* Bottom Bar */}
-        <div className="mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="py-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-col gap-2 text-center md:text-left">
             <p className="font-heading text-[10px] font-black uppercase tracking-[0.4em] text-white/20">
               © {new Date().getFullYear()} Joshua Kimbareeba
@@ -123,12 +20,32 @@ const Footer = () => {
               <span className="text-[8px] font-black uppercase tracking-widest text-white/10">Available for new projects</span>
             </div>
           </div>
-          
+
           <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.02] rounded-full border border-white/5">
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/2 rounded-full border border-white/5">
               <Code size={12} className="text-accent" />
-              <span className="text-[8px] font-black uppercase tracking-widest text-white/30">Crafted with Precision</span>
+              <AnimatedText
+                as="span"
+                splitBy="words"
+                animation="slideUp"
+                scrollTriggered={true}
+                staggerDelay={60}
+                duration={600}
+                className="text-[8px] font-black uppercase tracking-widest text-white/30"
+              >
+                Crafted with Precision
+              </AnimatedText>
             </div>
+
+            <button
+              onClick={scrollToTop}
+              className="group flex items-center gap-4 font-heading text-xs font-black uppercase tracking-[0.4em] text-white/40 hover:text-white transition-all cursor-pointer"
+            >
+              <span>Top</span>
+              <div className="w-12 h-12 rounded-full bg-white/3 border border-white/10 flex items-center justify-center group-hover:bg-accent group-hover:border-accent group-hover:text-white group-hover:-translate-y-2 transition-all duration-500">
+                <ArrowUp size={20} />
+              </div>
+            </button>
           </div>
         </div>
       </div>
@@ -137,6 +54,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-
-

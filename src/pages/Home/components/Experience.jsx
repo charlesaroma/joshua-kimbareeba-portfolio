@@ -11,6 +11,7 @@ import {
   Smartphone,
   Monitor,
 } from "lucide-react";
+import ScrollRevealSection from "../../../components/Animations/ScrollRevealSection";
 
 const experiences = [
   {
@@ -166,11 +167,16 @@ const Experience = () => {
                 </h3>
               </div>
 
-              <div className="skills-grid grid grid-cols-2 gap-4">
+              <ScrollRevealSection
+                animation="scaleIn"
+                selector=".anime-skill"
+                staggerDelay={80}
+                className="skills-grid grid grid-cols-2 gap-4"
+              >
                 {techStack.map((skill, index) => (
                   <div
                     key={index}
-                    className="skill-card group glass-card p-6 rounded-2xl hover:bg-primary transition-all duration-500 border border-primary/5 hover:border-primary"
+                    className="anime-skill skill-card group glass-card p-6 rounded-2xl hover:bg-primary transition-all duration-500 border border-primary/5 hover:border-primary"
                   >
                     <div className="flex flex-col gap-6">
                       <div className="w-12 h-12 rounded-xl bg-bg border border-primary/5 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500 shadow-sm">
@@ -193,7 +199,7 @@ const Experience = () => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </ScrollRevealSection>
 
               {/* CTA Card */}
               <div className="mt-12 p-8 rounded-3xl bg-primary text-white relative overflow-hidden cursor-pointer">

@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ArrowRight } from 'lucide-react';
+import AnimatedText from '../../../components/Animations/AnimatedText';
 
 const Hero = () => {
   const container = useRef();
@@ -50,12 +51,20 @@ const Hero = () => {
         </span>
 
         {/* Main Heading */}
-        <h1 className="text-5xl font-black uppercase tracking-tighter text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl">
+        <AnimatedText
+          as="h1"
+          splitBy="chars"
+          animation="reveal"
+          scrollTriggered={false}
+          staggerDelay={25}
+          duration={900}
+          className="text-5xl font-black uppercase tracking-tighter text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl"
+        >
           SOFTWARE
           <span className="block bg-linear-to-b from-white to-white/40 bg-clip-text text-transparent">
             ARCHITECT
           </span>
-        </h1>
+        </AnimatedText>
 
         {/* Description */}
         <p className="mt-6 text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
