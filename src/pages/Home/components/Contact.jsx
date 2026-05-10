@@ -14,20 +14,17 @@ const Contact = () => {
   ];
 
   useGSAP(() => {
-    if (!container.current) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const mm = gsap.matchMedia();
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.from(".contact-title", {
-        scrollTrigger: { trigger: ".contact-title", start: "top 90%" },
-        opacity: 0, y: 30, duration: 1, ease: "power3.out"
-      });
-      gsap.from(".social-icon", {
-        scrollTrigger: { trigger: ".social-container", start: "top 95%" },
-        opacity: 0, scale: 0.8, stagger: 0.1, duration: 0.6, ease: "power2.out"
-      });
+    gsap.from(".contact-title", {
+      scrollTrigger: { trigger: ".contact-title", start: "top 85%" },
+      opacity: 0, y: 30, duration: 1, ease: "power3.out"
     });
-  }, { scope: container });
+    gsap.from(".social-icon", {
+      scrollTrigger: { trigger: ".social-container", start: "top 90%" },
+      opacity: 0, scale: 0.8, stagger: 0.1, duration: 0.6, ease: "power2.out"
+    });
+  }, { scope: container, dependencies: [] });
 
   return (
     <section

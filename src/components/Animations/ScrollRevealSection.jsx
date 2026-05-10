@@ -2,12 +2,27 @@ import { animate, createScope, onScroll, stagger } from 'animejs';
 import { useEffect, useRef } from 'react';
 
 const animationPresets = {
-  fadeUp: { opacity: { from: 0, to: 1 }, translateY: { from: '3rem', to: 0 } },
-  fadeLeft: { opacity: { from: 0, to: 1 }, translateX: { from: '-3rem', to: 0 } },
-  fadeRight: { opacity: { from: 0, to: 1 }, translateX: { from: '3rem', to: 0 } },
-  scaleIn: { opacity: { from: 0, to: 1 }, scale: { from: 0.85, to: 1 } },
+  fadeUp: { opacity: { from: 0 }, translateY: { from: '3rem' } },
+  fadeLeft: { opacity: { from: 0 }, translateX: { from: '-3rem' } },
+  fadeRight: { opacity: { from: 0 }, translateX: { from: '3rem' } },
+  scaleIn: { opacity: { from: 0 }, scale: { from: 0.85 } },
 };
 
+/**
+ * Wraps children in a scroll-triggered reveal animation using anime.js onScroll.
+ *
+ * Uses `createScope` for React-safe cleanup. Children matching the `selector`
+ * are staggered in with the chosen animation preset.
+ *
+ * Props:
+ * - animation: 'fadeUp' | 'fadeLeft' | 'fadeRight' | 'scaleIn'
+ * - staggerDelay: ms between child animations
+ * - duration: ms per animation
+ * - selector: CSS selector for targets inside the wrapper
+ * - debug: show anime.js scroll debug overlay
+ * - as: wrapper HTML tag
+ * - enter: scroll enter threshold (default: 'top bottom')
+ */
 const ScrollRevealSection = ({
   children,
   animation = 'fadeUp',
@@ -17,6 +32,7 @@ const ScrollRevealSection = ({
   debug = false,
   className = '',
   as: Tag = 'div',
+  enter = 'top bottom',
 }) => {
   const root = useRef(null);
   const scope = useRef(null);
@@ -35,6 +51,7 @@ const ScrollRevealSection = ({
         ease: 'out(3)',
         autoplay: onScroll({
           target: root.current,
+          enter,
           debug,
         }),
       });
