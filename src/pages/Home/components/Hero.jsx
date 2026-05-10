@@ -50,21 +50,33 @@ const Hero = () => {
           Building the Digital Future
         </span>
 
-        {/* Main Heading */}
-        <AnimatedText
-          as="h1"
-          splitBy="chars"
-          animation="reveal"
-          scrollTriggered={false}
-          staggerDelay={25}
-          duration={900}
-          className="text-5xl font-black uppercase tracking-tighter text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl"
-        >
-          SOFTWARE
-          <span className="block bg-linear-to-b from-white to-white/40 bg-clip-text text-transparent">
+        {/* Main Heading — Two separate AnimatedText for proper splitting */}
+        <div className="overflow-hidden">
+          <AnimatedText
+            as="h1"
+            splitBy="chars"
+            animation="reveal"
+            scrollTriggered={false}
+            staggerDelay={30}
+            duration={900}
+            className="text-5xl font-black uppercase tracking-tighter text-white leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl"
+          >
+            SOFTWARE
+          </AnimatedText>
+        </div>
+        <div className="overflow-hidden">
+          <AnimatedText
+            as="span"
+            splitBy="chars"
+            animation="reveal"
+            scrollTriggered={false}
+            staggerDelay={35}
+            duration={1000}
+            className="block text-5xl font-black uppercase tracking-tighter leading-[0.9] sm:text-6xl md:text-7xl lg:text-8xl bg-linear-to-b from-white to-white/40 bg-clip-text text-transparent"
+          >
             ARCHITECT
-          </span>
-        </AnimatedText>
+          </AnimatedText>
+        </div>
 
         {/* Description */}
         <p className="mt-6 text-center text-sm leading-none text-white/60 md:whitespace-nowrap md:text-base">
