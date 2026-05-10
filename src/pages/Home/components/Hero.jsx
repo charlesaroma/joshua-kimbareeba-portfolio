@@ -5,7 +5,7 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ArrowRight } from 'lucide-react';
 import { animate, splitText, stagger, scrambleText } from 'animejs';
 
-const roles = ['ARCHITECT', 'DEVELOPER', 'ENGINEER', 'STRATEGIST'];
+const roles = ['ENGINEER', 'DEVELOPER', 'ARCHITECT', 'STRATEGIST'];
 
 const Hero = () => {
   const container = useRef();
@@ -46,17 +46,19 @@ const Hero = () => {
   // Cycling roles with scrambleText
   useEffect(() => {
     const interval = setInterval(() => {
-      // Fade out current role
+      if (!roleRef.current) return;
+      
+      // 1. Fade out current role
       animate(roleRef.current, {
         opacity: [1, 0],
-        translateY: -10,
-        duration: 300,
+        translateY: [0, -10],
+        duration: 400,
         ease: 'in(2)',
         onComplete: () => {
           setRoleIndex((prev) => (prev + 1) % roles.length);
         }
       });
-    }, 4000);
+    }, 4500);
 
     return () => clearInterval(interval);
   }, []);
@@ -65,12 +67,16 @@ const Hero = () => {
   useEffect(() => {
     if (!roleRef.current) return;
     
+    // Ensure styles are reset before starting the next animation
+    roleRef.current.style.opacity = '1';
+    roleRef.current.style.transform = 'translateY(0px)';
+
     // Scramble reveal animation
     animate(roleRef.current, {
       opacity: [0, 1],
       translateY: [10, 0],
       innerHTML: scrambleText(roles[roleIndex]),
-      duration: 1000,
+      duration: 1200,
       ease: 'out(3)'
     });
   }, [roleIndex]);
