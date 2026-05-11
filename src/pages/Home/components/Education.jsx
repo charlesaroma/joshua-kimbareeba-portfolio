@@ -111,7 +111,7 @@ const Education = () => {
               {education.map((item, index) => (
                 <div key={index} className="edu-item relative">
                   {/* Timeline Node */}
-                  <div className="absolute -left-[10px] md:-left-[20px] top-0 -translate-x-1/2 w-5 h-5 md:w-10 md:h-10 rounded-full bg-primary border-[3px] border-accent flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.3)] z-20">
+                  <div className="absolute left-[-10px] md:left-[-20px] top-0 -translate-x-1/2 w-5 h-5 md:w-10 md:h-10 rounded-full bg-primary border-[3px] border-accent flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.3)] z-20">
                     <item.icon className="text-accent w-2.5 h-2.5 md:w-5 md:h-5" />
                   </div>
 
@@ -139,7 +139,7 @@ const Education = () => {
 
                     {/* Details/Tags */}
                     <div className="lg:col-span-5">
-                      <div className="bg-white/[0.03] border border-white/5 rounded-2xl p-8 backdrop-blur-sm">
+                      <div className="bg-white/3 border border-white/5 rounded-2xl p-8 backdrop-blur-sm">
                         <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-6">Technical Focus</h4>
                         <div className="flex flex-wrap gap-3">
                           {item.details.map((detail, i) => (
