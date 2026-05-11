@@ -102,7 +102,7 @@ const Hero = () => {
       {/* Hero Content */}
       <div className="hero-content relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
         {/* Label */}
-        <span className="mb-6 font-heading text-[9px] font-bold uppercase tracking-[0.35em] text-accent">
+        <span className="mb-6 font-heading text-[9px] font-bold uppercase tracking-[0.35em] text-accent-neon">
           Building the Digital Future
         </span>
 
@@ -110,7 +110,7 @@ const Hero = () => {
         <div className="mb-2">
           <h1 
             ref={softwareRef}
-            className="text-4xl font-black uppercase tracking-tighter text-white leading-none sm:text-5xl md:text-6xl lg:text-8xl"
+            className="text-4xl font-black uppercase tracking-tighter text-text-off leading-none sm:text-5xl md:text-6xl lg:text-8xl"
           >
             SOFTWARE
           </h1>
@@ -120,20 +120,20 @@ const Hero = () => {
           <span 
             ref={roleRef}
             className="block text-4xl font-black uppercase tracking-tighter leading-none sm:text-5xl md:text-6xl lg:text-8xl text-transparent"
-            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.5)' }}
+            style={{ WebkitTextStroke: '1px rgba(228, 228, 231, 0.5)' }}
           >
             {roles[roleIndex]}
           </span>
         </div>
 
-        <p className="mt-12 text-center text-sm md:text-base leading-snug text-white/60 w-full max-w-4xl mx-auto">
+        <p className="mt-12 text-center text-sm md:text-base leading-snug text-text-off/60 w-full max-w-4xl mx-auto">
           Full-stack architectures for web, mobile, and desktop. Engineered for performance, scalability, and impact.
         </p>
 
         <div className="mt-8 flex items-center justify-center gap-4">
           <button
             onClick={() => ScrollSmoother.get()?.scrollTo('#projects')}
-            className="flex min-w-[140px] items-center justify-center gap-2 bg-white px-5 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent hover:text-white cursor-pointer"
+            className="flex min-w-[140px] items-center justify-center gap-2 bg-offwhite px-5 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-black transition-all hover:bg-accent-emerald hover:text-text-off cursor-pointer"
           >
             Projects
            <ArrowRight size={14} />
@@ -141,7 +141,7 @@ const Hero = () => {
 
           <button
             onClick={() => ScrollSmoother.get()?.scrollTo('#contact')}
-            className="flex min-w-[140px] items-center justify-center border border-white/20 px-5 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-white/70 transition-all hover:border-white hover:text-white cursor-pointer"
+            className="flex min-w-[140px] items-center justify-center border border-text-off/20 px-5 py-3 text-[9px] font-bold uppercase tracking-[0.2em] text-text-off/70 transition-all hover:border-accent-emerald hover:text-accent-emerald cursor-pointer"
           >
             Get in Touch
           </button>

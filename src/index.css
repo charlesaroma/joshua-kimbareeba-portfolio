@@ -7,9 +7,16 @@
 
   --color-primary: #18181B;
   --color-secondary: #3F3F46;
-  --color-accent: #2563EB;
-  --color-bg: #FAFAFA;
+  --color-accent: #10B981; /* Emerald-500 for main accents */
+  --color-accent-dark: #06402B;
+  --color-accent-forest: #124622;
+  --color-accent-emerald: #27592D;
+  --color-accent-racing: #004225;
+  --color-accent-neon: #00FF9C;
+  --color-bg: #F4F4F5; /* Zinc-100 off-white */
   --color-text: #09090B;
+  --color-text-off: #E4E4E7; /* Zinc-200 for light text on dark bg */
+  --color-offwhite: #FAFAFA;
 
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -74,6 +81,15 @@ a {
 
 .card-hover {
   @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.33%); } /* Loop after 1/3 of the track (since we have 6 copies) */
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

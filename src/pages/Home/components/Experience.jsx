@@ -74,15 +74,15 @@ const Experience = () => {
           duration: 0.8,
           ease: "back.out(1.7)",
         });
-        gsap.from(".timeline-line", {
+        gsap.to(".timeline-progress", {
           scrollTrigger: {
             trigger: ".timeline-container",
-            start: "top 70%",
-            end: "bottom 70%",
+            start: "top 60%",
+            end: "bottom 60%",
             scrub: 1,
           },
-          scaleY: 0,
-          transformOrigin: "top center",
+          scaleY: 1,
+          ease: "none",
         });
       });
     },
@@ -103,7 +103,7 @@ const Experience = () => {
           {/* Left: Experience Timeline */}
           <div className="lg:col-span-7">
             <div className="exp-title mb-20">
-              <span className="font-heading font-bold text-accent uppercase tracking-[0.4em] text-xs mb-4 block">
+              <span className="font-heading font-bold text-accent-neon uppercase tracking-[0.4em] text-xs mb-4 block">
                 Professional Path
               </span>
               <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase leading-tight text-primary">
@@ -113,14 +113,17 @@ const Experience = () => {
             </div>
 
             <div className="timeline-container relative pl-8 md:pl-12">
-              {/* Vertical Progress Line */}
-              <div className="timeline-line absolute left-0 top-0 w-[2px] h-full bg-linear-to-b from-accent via-accent/50 to-primary/5"></div>
+            <div className="timeline-line absolute left-0 top-0 w-[2px] h-full bg-primary/5">
+              {/* This is the active drawing line */}
+              <div className="timeline-progress absolute top-0 left-0 w-full h-full bg-linear-to-b from-accent via-accent/50 to-accent origin-top scale-y-0">
+                {/* Glowing Lead Indicator */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent shadow-[0_0_15px_rgba(0,255,156,0.8)]"></div>
+              </div>
+            </div>
 
               <div className="space-y-16">
                 {experiences.map((exp, index) => (
                   <div key={index} className="timeline-item relative">
-                    {/* Node */}
-                    <div className="absolute left-[-35px] md:left-[-51px] top-0 w-4 h-4 md:w-6 md:h-6 rounded-full bg-bg border-4 border-accent shadow-[0_0_15px_rgba(37,99,235,0.4)] z-20"></div>
 
                     <div className="flex flex-col gap-4">
                       <span className="px-3 py-1 bg-accent/10 text-accent font-heading font-bold text-[10px] uppercase tracking-widest rounded-full w-fit">
@@ -131,7 +134,7 @@ const Experience = () => {
                         <h3 className="text-3xl md:text-4xl font-black uppercase text-primary leading-none mb-2">
                           {exp.role}
                         </h3>
-                        <p className="text-xl font-bold text-accent/80 uppercase tracking-tight">
+                        <p className="text-xl font-bold text-accent-emerald uppercase tracking-tight">
                           {exp.company}
                         </p>
                       </div>
@@ -163,7 +166,7 @@ const Experience = () => {
               <div className="mb-12">
                 <h3 className="text-2xl font-black uppercase tracking-tighter text-primary flex items-center gap-4">
                   Technical Mastery
-                  <span className="h-px grow bg-primary/10"></span>
+                  <span className="h-px grow bg-zinc-200"></span>
                 </h3>
               </div>
 
@@ -176,19 +179,19 @@ const Experience = () => {
                 {techStack.map((skill, index) => (
                   <div
                     key={index}
-                    className="anime-skill skill-card group glass-card p-6 rounded-2xl hover:bg-primary transition-all duration-500 border border-primary/5 hover:border-primary"
+                    className="anime-skill skill-card group p-6 rounded-2xl bg-white border border-zinc-200 hover:border-accent hover:shadow-lg transition-all duration-500 cursor-default"
                   >
                     <div className="flex flex-col gap-6">
-                      <div className="w-12 h-12 rounded-xl bg-bg border border-primary/5 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500 shadow-sm">
+                      <div className="w-12 h-12 rounded-xl bg-zinc-50 border border-zinc-200 flex items-center justify-center text-primary group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-all duration-500 shadow-sm">
                         <skill.icon size={24} />
                       </div>
 
                       <div>
-                        <h4 className="font-black text-sm uppercase tracking-wider text-primary group-hover:text-white transition-colors">
+                        <h4 className="font-black text-sm uppercase tracking-wider text-primary transition-colors">
                           {skill.name}
                         </h4>
                         <div className="flex items-center gap-2 mt-1">
-                          <div className="h-1 w-8 bg-primary/10 group-hover:bg-white/20 rounded-full overflow-hidden">
+                          <div className="h-1 w-8 bg-zinc-200 rounded-full overflow-hidden">
                             <div className="h-full bg-accent w-full"></div>
                           </div>
                           <span className="text-[8px] font-bold uppercase tracking-widest text-secondary/50 group-hover:text-white/40">
@@ -202,12 +205,12 @@ const Experience = () => {
               </ScrollRevealSection>
 
               {/* CTA Card */}
-              <div className="mt-12 p-8 rounded-3xl bg-primary text-white relative overflow-hidden cursor-pointer">
+              <div className="mt-12 p-8 rounded-3xl bg-primary text-text-off relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform duration-500">
                 <div className="absolute top-0 right-0 p-4 opacity-10">
                   <Terminal size={80} />
                 </div>
                 <div className="relative z-10">
-                  <p className="text-accent font-bold uppercase tracking-[0.3em] text-[10px] mb-2">
+                  <p className="text-accent-neon font-bold uppercase tracking-[0.3em] text-[10px] mb-2">
                     Available for hire
                   </p>
                   <h4 className="text-xl font-black uppercase leading-tight mb-4">

@@ -38,15 +38,16 @@ const Education = () => {
     const mm = gsap.matchMedia();
     mm.add("(prefers-reduced-motion: no-preference)", () => {
       // Reveal the vertical line
-      gsap.from(".edu-timeline-line", {
+      // Reveal the vertical line progress
+      gsap.to(".edu-timeline-progress", {
         scrollTrigger: {
           trigger: ".edu-timeline-container",
-          start: "top 80%",
-          end: "bottom 20%",
+          start: "top 60%",
+          end: "bottom 60%",
           scrub: 1,
         },
-        scaleY: 0,
-        transformOrigin: "top center",
+        scaleY: 1,
+        ease: "none",
       });
 
       // Stagger items
@@ -86,16 +87,16 @@ const Education = () => {
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="mb-24">
-            <span className="font-heading font-bold text-accent uppercase tracking-[0.4em] text-xs mb-6 block">
+            <span className="font-heading font-bold text-accent-neon uppercase tracking-[0.4em] text-xs mb-6 block">
               Architectural Foundation
             </span>
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase leading-tight text-white">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter uppercase leading-tight text-text-off">
                 EDUCATION
               </h2>
               
-              <div className="flex items-center gap-4 text-white/40">
-                <div className="h-px w-12 bg-white/20"></div>
+              <div className="flex items-center gap-4 text-text-off/40">
+                <div className="h-px w-12 bg-white/10"></div>
                 <span className="text-[10px] font-black uppercase tracking-[0.3em]">Knowledge Base</span>
                 <Award size={16} className="text-accent" />
               </div>
@@ -105,53 +106,42 @@ const Education = () => {
           {/* Timeline Layout */}
           <div className="edu-timeline-container relative pl-10 md:pl-20">
             {/* Main Vertical Line */}
-            <div className="edu-timeline-line absolute left-0 top-0 w-[2px] h-full bg-linear-to-b from-accent via-accent/50 to-transparent"></div>
+            <div className="edu-timeline-line absolute left-0 top-0 w-[2px] h-full bg-white/5">
+              {/* Active Drawing Line */}
+              <div className="edu-timeline-progress absolute top-0 left-0 w-full h-full bg-linear-to-b from-accent via-accent/50 to-transparent origin-top scale-y-0">
+                {/* Glowing Lead Indicator */}
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-accent shadow-[0_0_15px_rgba(0,255,156,0.8)]"></div>
+              </div>
+            </div>
 
             <div className="space-y-32">
               {education.map((item, index) => (
                 <div key={index} className="edu-item relative">
                   {/* Timeline Node */}
-                  <div className="absolute left-[-10px] md:left-[-20px] top-0 -translate-x-1/2 w-5 h-5 md:w-10 md:h-10 rounded-full bg-primary border-[3px] border-accent flex items-center justify-center shadow-[0_0_20px_rgba(37,99,235,0.3)] z-20">
+                  <div className="absolute left-[-10px] md:left-[-20px] top-0 -translate-x-1/2 w-5 h-5 md:w-10 md:h-10 rounded-full bg-primary border-[3px] border-accent flex items-center justify-center shadow-[0_0_20px_rgba(39,89,45,0.3)] z-20">
                     <item.icon className="text-accent w-2.5 h-2.5 md:w-5 md:h-5" />
                   </div>
 
                   {/* Year Tag */}
                   <div className="mb-6">
-                    <span className="text-accent font-heading font-black text-xs md:text-sm uppercase tracking-[0.3em] bg-accent/10 px-4 py-1.5 rounded-sm">
+                    <span className="text-accent-emerald font-heading font-black text-xs md:text-sm uppercase tracking-[0.3em] bg-accent/10 px-4 py-1.5 rounded-sm">
                       {item.year}
                     </span>
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
                     {/* Content */}
-                    <div className="lg:col-span-7">
-                      <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white leading-tight mb-4 group cursor-default">
+                    <div className="lg:col-span-12">
+                      <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-text-off leading-tight mb-4 group cursor-default">
                         {item.institution}
                         <ArrowUpRight className="inline-block ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all text-accent" size={32} />
                       </h3>
-                      <p className="text-xl md:text-2xl font-bold text-white/80 uppercase tracking-tight mb-6 leading-tight">
+                      <p className="text-xl md:text-2xl font-bold text-text-off/80 uppercase tracking-tight mb-6 leading-tight">
                         {item.degree}
                       </p>
-                      <p className="text-base md:text-lg text-white/50 font-medium leading-relaxed w-full mb-8">
+                      <p className="text-base md:text-lg text-text-off/50 font-medium leading-relaxed w-full">
                         {item.description}
                       </p>
-                    </div>
-
-                    {/* Details/Tags */}
-                    <div className="lg:col-span-5">
-                      <div className="bg-white/3 border border-white/5 rounded-2xl p-8 backdrop-blur-sm">
-                        <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 mb-6">Technical Focus</h4>
-                        <div className="flex flex-wrap gap-3">
-                          {item.details.map((detail, i) => (
-                            <span 
-                              key={i}
-                              className="px-4 py-2 bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest text-white/70 hover:bg-accent/20 hover:border-accent/40 transition-colors cursor-default"
-                            >
-                              {detail}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -163,7 +153,7 @@ const Education = () => {
 
       {/* Decorative Background Text */}
       <div className="absolute -bottom-5 -left-10 opacity-[0.02] select-none pointer-events-none hidden lg:block">
-        <span className="text-[120px] font-black uppercase text-white leading-none tracking-tighter">
+        <span className="text-[120px] font-black uppercase text-text-off leading-none tracking-tighter">
           ACADEMIA
         </span>
       </div>

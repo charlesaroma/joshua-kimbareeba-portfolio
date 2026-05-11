@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
-import { animate, createScope, onScroll, splitText, stagger, createTimer } from 'animejs';
+import { animate, createScope, onScroll, splitText, stagger } from 'animejs';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const philosophyItems = [
   {
@@ -36,13 +38,6 @@ const AnimeShowcase = () => {
 
     scope.current = createScope({ root }).add(() => {
 
-      // --- Marquee: Infinite horizontal scroll ---
-      animate('.marquee-track', {
-        translateX: [0, '-50%'],
-        duration: 40000,
-        loop: true,
-        ease: 'linear',
-      });
 
       // --- Section heading: split text reveal using addEffect() ---
       const heading = root.current.querySelector('.showcase-heading');
@@ -60,33 +55,34 @@ const AnimeShowcase = () => {
           }));
       }
 
-      // --- Scroll progress counter ---
-      if (counterRef.current) {
-        const counterObj = { value: 0 };
-        createTimer({
-          duration: 1000,
-          onUpdate: () => {
-            counterRef.current.textContent = Math.round(counterObj.value) + '%';
-          },
-          autoplay: onScroll({
-            target: root.current,
-            sync: 'playhead',
-          }),
-        });
-        animate(counterObj, {
-          value: 100,
-          duration: 1000,
-          ease: 'linear',
-          autoplay: onScroll({
-            target: root.current,
-            sync: 'playhead',
-          }),
-        });
-      }
     });
 
     return () => scope.current?.revert();
   }, []);
+
+  // GSAP for robust Scroll Progress Counter (Works better with ScrollSmoother)
+  useGSAP(() => {
+    if (!counterRef.current || !root.current) return;
+    
+    gsap.fromTo(counterRef.current, 
+      { innerText: 0 },
+      {
+        innerText: 100,
+        snap: { innerText: 1 },
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+        onUpdate: function() {
+          if (counterRef.current) {
+            counterRef.current.textContent = Math.floor(this.targets()[0].innerText) + "%";
+          }
+        }
+      }
+    );
+  }, { scope: root });
 
   // Polished transition for philosophy items
   const handleItemClick = (index) => {
@@ -133,11 +129,18 @@ const AnimeShowcase = () => {
 
       {/* Marquee Band */}
       <div className="pointer-events-none select-none border-y border-white/5 py-5 overflow-hidden">
-        <div className="marquee-track flex whitespace-nowrap" style={{ width: 'max-content' }}>
-          {[0, 1].map((i) => (
+        <div 
+          className="marquee-track flex whitespace-nowrap" 
+          style={{ 
+            width: 'max-content',
+            animation: 'marquee 60s linear infinite',
+          }}
+        >
+          {[0, 1, 2, 3, 4, 5].map((i) => (
             <span
               key={i}
-              className="mx-4 inline-block text-6xl md:text-7xl font-black uppercase tracking-tighter text-white/4"
+              className="mx-4 inline-block text-6xl md:text-7xl font-black uppercase tracking-tighter"
+              style={{ color: 'rgba(255,255,255,0.08)' }}
             >
               {marqueeText}
             </span>
